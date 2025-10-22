@@ -1,0 +1,101 @@
+:root{
+  --bg:#0b0c10; --panel:#141a21; --line:#1f2833; --text:#e8e8e8;
+  --muted:#b7c7d9; --brand:#9bdcff; --ok:#0f5132; --ok-line:#0a3622;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg); color:var(--text);
+}
+a{color:var(--brand); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Topbar */
+.nav{
+  display:flex; align-items:center; gap:.75rem; padding:1rem;
+  border-bottom:1px solid var(--line); background:#11151a;
+}
+.brand{display:flex; align-items:center; gap:.5rem; font-weight:700}
+.brand-logo{height:24px; width:24px; object-fit:contain; opacity:.9}
+.brand-name{font-size:1.1rem}
+.grow{flex:1}
+.badge{
+  font-size:.8rem; padding:.2rem .5rem; border:1px solid var(--line);
+  border-radius:999px; color:var(--muted); margin-right:.5rem;
+}
+
+/* Layout */
+.container{max-width:1000px; margin:2rem auto; padding:0 1rem}
+.grid{display:grid; gap:1rem}
+@media (min-width: 800px){ .grid{grid-template-columns:repeat(3,1fr)} }
+
+.card{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:1rem; box-shadow:0 1px 0 rgba(255,255,255,.02) inset;
+}
+h1{margin:.2rem 0 1rem 0; font-size:1.6rem}
+h2{margin:.2rem 0 .75rem 0; font-size:1.1rem; color:#d8e6f3}
+
+/* Buttons */
+.btn, .btn-outline{
+  display:inline-block; padding:.6rem 1rem; border-radius:10px;
+  border:1px solid var(--line); background:#16202a; transition:background .15s ease;
+}
+.btn:hover{background:#1a2632}
+.btn-outline{background:transparent}
+.btn-outline:hover{background:#0e141b}
+
+/* Account layout */
+.account-wrapper{display:grid; gap:1.5rem; max-width:960px; margin:0 auto; padding:0 1rem}
+.account-messages{display:grid; gap:.75rem}
+.account-grid{display:grid; gap:1.5rem}
+.account-grid--with-menu{align-items:start}
+@media (min-width:900px){
+  .account-grid--with-menu{grid-template-columns:260px 1fr}
+}
+.account-menu{padding:1.25rem}
+.account-menu-title{margin-top:0; margin-bottom:.75rem; font-size:1rem; color:#d8e6f3}
+.account-menu-list{list-style:none; margin:0; padding:0; display:grid; gap:.5rem}
+.account-menu-list a{color:var(--text); display:block; padding:.4rem .6rem; border-radius:8px; transition:background .15s ease}
+.account-menu-list a:hover{background:rgba(155,220,255,.08)}
+.account-main{display:grid}
+.account-card{padding:1.75rem; display:grid; gap:1.5rem; max-width:440px; margin:0 auto}
+.account-stack{padding:1.75rem; display:grid; gap:1.25rem; max-width:600px; margin:0 auto; width:100%}
+
+/* Forms */
+form{display:grid; gap:1rem}
+form p{margin:0; display:grid; gap:.35rem}
+label{color:var(--muted); font-size:.9rem}
+input, select, textarea{
+  width:100%; padding:.65rem .75rem; border-radius:10px;
+  border:1px solid var(--line); background:#111820; color:var(--text);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+input:focus, select:focus, textarea:focus{
+  border-color:var(--brand); outline:none;
+  box-shadow:0 0 0 3px rgba(155,220,255,.12);
+}
+button, input[type=submit]{
+  padding:.65rem 1.25rem; border-radius:10px; border:1px solid var(--line);
+  background:#16202a; color:var(--text); font-size:.95rem; cursor:pointer;
+  transition:background .15s ease;
+}
+button:hover, input[type=submit]:hover{background:#1a2632}
+.account-card form .button, .account-card form button, .account-card form input[type=submit]{justify-self:start}
+.account-links{display:flex; gap:1rem; flex-wrap:wrap; font-size:.9rem}
+ul.errorlist{list-style:none; margin:0; padding:0; display:grid; gap:.35rem}
+ul.errorlist li{
+  background:#3e1a1f; color:#ffdfe4; padding:.45rem .75rem; border-radius:8px;
+  border:1px solid #5b2028;
+}
+
+/* Footer */
+.footer{
+  margin-top:3rem; border-top:1px solid var(--line); padding:1rem; text-align:center;
+  color:var(--muted); font-size:.9rem;
+}
+
+/* Alerts (por si luego los usas) */
+.flash{background:var(--ok); border:1px solid var(--ok-line); color:#d1f7d6;
+  padding:.6rem 1rem; border-radius:10px; margin:.5rem 0}

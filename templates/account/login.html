@@ -1,0 +1,21 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load account %}
+
+{% block head_title %}{% trans "Entrar" %}{% endblock head_title %}
+
+{% block content %}
+  <h1>{% trans "Accede a tu cuenta" %}</h1>
+  <form method="post" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ redirect_field }}
+    <button type="submit" class="btn">{% trans "Entrar" %}</button>
+  </form>
+  {% if signup_url %}
+    <p class="account-links">
+      <span>{% trans "&iquest;A&uacute;n no tienes cuenta?" %}</span>
+      <a class="btn-outline" href="{{ signup_url }}">{% trans "Reg&iacute;strate" %}</a>
+    </p>
+  {% endif %}
+{% endblock content %}
