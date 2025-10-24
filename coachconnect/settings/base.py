@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from .base import *
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 
 # Quick-start development settings - unsuitable for production
@@ -22,8 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-only")
 
-ALLOWED_HOSTS = []
 
+
+DEBUG = True
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
@@ -35,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     #allauth
     "django.contrib.sites",
     "allauth",
@@ -45,6 +51,7 @@ INSTALLED_APPS = [
     #apps
     "core",
     "accounts.apps.AccountsConfig",
+    'workouts',
 ]
 
 SITE_ID = 1
@@ -53,7 +60,7 @@ LOGIN_REDIRECT_URL = "core:home"
 ACCOUNT_EMAIL_VERIFICATION = "optional"  # en prod: "mandatory"
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
-
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,12 +97,33 @@ WSGI_APPLICATION = 'coachconnect.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DEBUG=True
+# DB_HOST=localhost
+# DB_NAME=coachconnect_database
+# DB_PASSWORD=coachconnect_pass
+# DB_PORT=5432
+# DB_USER=coachconnect_user
+
+
+DB_HOST = os.getenv("DB_HOST")
+DB_NAME = os.getenv("DB_NAME")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_PORT = os.getenv("DB_PORT")
+DB_USER = os.getenv("DB_USER")
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": DB_NAME,
+        "USER": DB_USER,
+        "PASSWORD": DB_PASSWORD,
+        "HOST": DB_HOST,
+        "PORT": DB_PORT,
     }
+
 }
+
+
 
 
 # Password validation
